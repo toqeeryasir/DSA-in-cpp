@@ -2,142 +2,133 @@
 #include <string>
 #include <cmath>
 using namespace std;
-
-struct node {
+struct node
+{
     int data;
     node *next = NULL;
 };
 
-class LinkedList {
+class LinkedList
+{
 public:
-    node *head, *curr;
+    node *head, *temp;
+    node *pointer;
+    int static count;
+    int value, len;
 
 public:
-    LinkedList() {
+    LinkedList()
+    {
+
         head = NULL;
-        curr = NULL;
+        temp = NULL;
+        count++;
+    }
+    void creat_linked_list()
+    {
+        cout << "How many values u wanna input ?" << endl;
+        cin >> len;
+        for (int i = 1; i <= len; i++)
+        {
+            cout << "Input value for node no. " << i << endl;
+            cin >> value;
+            LinkedList::insert_node(value);
+        }
+        cout << "Values of list no. " << count << " are" << endl;
     }
 
-    void insert_at_end(int data) {
+    void insert_node(int data) // same as adding a node at the end of the list
+    {
         node *newnode = new node;
         newnode->data = data;
-        if (head == NULL) {
-            curr = head = newnode;
-        } else {
-            curr = head;
-            while (curr->next != NULL) {
-                curr = curr->next;
-            }
-            curr->next = newnode;
+        newnode->next = NULL;
+
+        if (head == NULL)
+        {
+            temp = head = newnode;
+        }
+        else
+        {
+            temp->next = newnode;
+            temp = newnode;
         }
     }
 
-    void insert_at_head(int data) {
+    void insert_at_head(int data)
+    {
         node *newnode = new node;
         newnode->data = data;
+        newnode->next = NULL;
+
         newnode->next = head;
         head = newnode;
     }
 
-    void insert_at_kth(int data, int pos) {
-        if (pos == 1) {
-            insert_at_head(data);
-            return;
-        }
-        
-        int x = 1;
-        curr = head;
-        while (x != pos - 1 && curr != NULL) {
-            curr = curr->next;
+    void insert_at_kth(int pose, int data)
+    {
+        int x = 2;
+        temp = head;
+        while (x != pose)
+        {
+            temp = temp->next;
             x++;
         }
-        
-        if (curr == NULL) {
-            cout << "Position out of range" << endl;
-            return;
-        }
-
         node *newnode = new node;
         newnode->data = data;
-        newnode->next = curr->next;
-        curr->next = newnode;
+        newnode->next = temp->next;
+        temp->next = newnode;
     }
-
-    void delete_at_head() {
-        if (head == NULL) {
-            cout << "List is empty" << endl;
-            return;
-        }
-        node *temp = head;
-        head = head->next;
-        delete temp;
-    }
-
-    void delete_at_kth(int pos) {
-        if (head == NULL || pos == 1) {
-            delete_at_head();
-            return;
-        }
-
-        int x = 1;
-        curr = head;
-        while (x != pos - 1 && curr->next != NULL) {
-            curr = curr->next;
+    void delete_at_kth(int pose)
+    {
+        int x = 2;
+        temp = head;
+        while (x != pose)
+        {
+            temp = temp->next;
             x++;
         }
-
-        if (curr->next == NULL) {
-            cout << "Position out of range" << endl;
-            return;
-        }
-
-        node *del = curr->next;
-        curr->next = del->next;
+        node *del = temp->next;
+        temp->next = del->next;
         delete del;
     }
 
-    void delete_at_end() {
-        if (head == NULL) {
-            cout << "List is empty" << endl;
-            return;
+    void deleting_at_end()
+    {
+        temp = head;
+        while (temp->next->next != NULL)
+        {
+            temp = temp->next;
         }
-        
-        if (head->next == NULL) {
-            delete head;
-            head = NULL;
-            return;
-        }
-
-        curr = head;
-        while (curr->next->next != NULL) {
-            curr = curr->next;
-        }
-        delete curr->next;
-        curr->next = NULL;
+        delete temp->next;
+        temp->next = NULL;
     }
 
-    void display_list() {
-        curr = head;
-        while (curr != NULL) {
-            cout << curr->data << "->";
-            curr = curr->next;
+    void display_list()
+    {
+        temp = head;
+        while (temp != NULL)
+        {
+            cout << temp->data << "->";
+            temp = temp->next;
         }
-        cout << "NULL" << endl;
+        cout << endl;
     }
 };
 
-int main() {
+int LinkedList::count = 0;
+int main()
+{
     LinkedList List_1;
-    List_1.insert_at_end(12);
-    List_1.insert_at_end(15);
-    List_1.insert_at_head(17);
-    List_1.insert_at_kth(44, 2);
+    List_1.creat_linked_list();
     List_1.display_list();
-    List_1.delete_at_head();
+    List_1.insert_at_kth(5, 244);
     List_1.display_list();
-    List_1.delete_at_end();
+    List_1.delete_at_kth(5);
     List_1.display_list();
-    List_1.delete_at_kth(2);
+    List_1.insert_at_head(206);
     List_1.display_list();
+    List_1.deleting_at_end();
+    List_1.display_list();
+
     return 0;
 }
