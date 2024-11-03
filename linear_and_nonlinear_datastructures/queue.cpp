@@ -3,7 +3,6 @@
 using namespace std;
 
 struct node {
-    char prio;
     int data;
     node *next = NULL;
 };
@@ -16,20 +15,16 @@ public:
         head = NULL;
     }
 
-    void insertNode(int data, char prio) {
+    void insertNode(int data) {
         node *newnode = new node;
         newnode->data = data;
-        newnode->prio = prio;
-        newnode->next = NULL;
-        if (head == NULL || head->prio < newnode->prio) {
-            newnode->next = head;
+        if (head == NULL) {
             head = newnode;
         } else {
             node *curr = head;
-            while (curr->next != NULL && curr->next->prio >= newnode->prio){
+            while (curr->next != NULL){
                 curr = curr->next;
             }
-            newnode->next = curr->next;
             curr->next = newnode;
         }
     }
@@ -45,19 +40,20 @@ public:
     void displayQueue() {
         node *curr = head;
         while (curr != NULL) {
-            cout<<curr->data<<""<< curr->prio <<"->";
+            cout<<curr->data<<"->";
             curr = curr->next;
         }
-        cout<<"NULL"<<endl;
+        cout<<endl;
     }
 };
 
 int main() {
     Queue q1;
-    q1.insertNode(213, 'r');
-    q1.insertNode(365, 'r');
-    q1.insertNode(194, 'p');
-    q1.insertNode(404, 'r');
+    q1.insertNode(213);
+    q1.insertNode(365);
+    q1.insertNode(194);
+    q1.insertNode(404);
+    cout<<endl;
     q1.displayQueue();
     q1.deletion();
     q1.displayQueue();
