@@ -93,10 +93,10 @@ public:
 
 int main() {
     Tree obj1;
-    obj1.insert(244);
-    obj1.insert(44);
-    obj1.insert(344);
-    obj1.insert(144);
+    obj1.insert(314);
+    obj1.insert(210);
+    obj1.insert(355);
+    obj1.insert(113);
 
     cout << "BST preOrder: ";
     obj1.preOrder(obj1.root);
