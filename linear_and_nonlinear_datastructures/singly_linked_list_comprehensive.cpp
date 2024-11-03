@@ -121,7 +121,7 @@ int main()
     LinkedList List_1;
     List_1.creat_linked_list();
     List_1.display_list();
-    List_1.insert_at_kth(5, 244);
+    List_1.insert_at_kth(5, 144);
     List_1.display_list();
     List_1.delete_at_kth(5);
     List_1.display_list();

@@ -147,7 +147,7 @@ int main()
     List_1.insert_at_head(206);
     List_1.display_list_FWD();
     List_1.display_list_REV();
-    List_1.insert_at_kth(4, 244);
+    List_1.insert_at_kth(4, 255);
     List_1.display_list_FWD();
     List_1.display_list_REV();
     List_1.delete_at_kth(4);
