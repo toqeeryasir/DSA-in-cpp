@@ -34,13 +34,21 @@ public:
         }
     }
 
+    void deletion(){
+        node *temp;
+        temp = head;
+        head = head->next;
+        delete temp;
+        cout<<"Node has been deleted successfully"<<endl;
+    }
+
     void displayQueue() {
         node *curr = head;
         while (curr != NULL) {
-            cout << curr->data << " " << curr->prio << " -> ";
+            cout<<curr->data<<""<< curr->prio <<"->";
             curr = curr->next;
         }
-        cout << "NULL" << endl;
+        cout<<"NULL"<<endl;
     }
 };
 
@@ -50,6 +58,8 @@ int main() {
     q1.insertNode(344, 'r');
     q1.insertNode(144, 'p');
     q1.insertNode(444, 'r');
+    q1.displayQueue();
+    q1.deletion();
     q1.displayQueue();
     return 0;
 }
